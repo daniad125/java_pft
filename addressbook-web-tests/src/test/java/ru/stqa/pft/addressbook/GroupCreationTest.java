@@ -1,4 +1,4 @@
-package com.example.tests;
+package ru.stqa.pft.addressbook;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +25,7 @@ public class GroupCreationTest {
   }
 
   @Test
-  public void testHaha222() throws Exception {
+  public void GroupCreationTest() throws Exception {
     driver.get("https://localhost/addressbook/");
     driver.findElement(By.name("user")).click();
     driver.findElement(By.name("user")).clear();
