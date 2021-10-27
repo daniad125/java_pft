@@ -1,13 +1,13 @@
-package ru.stqa.pft.addressbook;
+package com.example.tests;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
 import org.openqa.selenium.support.ui.Select;
 
 public class GroupCreationTest {
@@ -25,16 +25,19 @@ public class GroupCreationTest {
   }
 
   @Test
-  public void testGroupCreation() throws Exception {
-    driver.get("https://localhost/addressbook/group.php");
+  public void testHaha222() throws Exception {
+    driver.get("https://localhost/addressbook/");
     driver.findElement(By.name("user")).click();
-    driver.findElement(By.name("user")).click();
-    // ERROR: Caught exception [ERROR: Unsupported command [doubleClick | name=user | ]]
+    driver.findElement(By.name("user")).clear();
+    driver.findElement(By.name("user")).sendKeys("admin");
     driver.findElement(By.id("LoginForm")).click();
     driver.findElement(By.name("pass")).click();
-    driver.findElement(By.name("pass")).click();
-    // ERROR: Caught exception [ERROR: Unsupported command [doubleClick | name=pass | ]]
+    driver.findElement(By.name("pass")).clear();
+    driver.findElement(By.name("pass")).sendKeys("secret");
+    driver.findElement(By.id("LoginForm")).click();
     driver.findElement(By.xpath("//input[@value='Login']")).click();
+    driver.findElement(By.id("container")).click();
+    driver.findElement(By.linkText("groups")).click();
     driver.findElement(By.name("new")).click();
     driver.findElement(By.name("group_name")).click();
     driver.findElement(By.name("group_name")).clear();
@@ -46,10 +49,8 @@ public class GroupCreationTest {
     driver.findElement(By.name("group_footer")).clear();
     driver.findElement(By.name("group_footer")).sendKeys("test3");
     driver.findElement(By.name("submit")).click();
-    driver.findElement(By.linkText("Logout")).click();
-    driver.findElement(By.name("user")).clear();
-    driver.findElement(By.name("user")).sendKeys("admin");
     driver.findElement(By.linkText("groups")).click();
+    driver.findElement(By.linkText("Logout")).click();
   }
 
   @AfterClass(alwaysRun = true)
