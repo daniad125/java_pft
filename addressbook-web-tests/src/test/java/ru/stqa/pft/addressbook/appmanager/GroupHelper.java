@@ -42,7 +42,9 @@ public class GroupHelper extends HelperBase{
     }
 
     public void returnToGroupPage() {
-        click(By.linkText("groups"));
+        if(isElementPresent(By.linkText("groups"))) {
+            click(By.linkText("groups"));
+        }
     }
 
     public boolean isThereAGroup() {
@@ -54,5 +56,9 @@ public class GroupHelper extends HelperBase{
         fillGroupForm(groupData);
         submitGroupCreation();
         returnToGroupPage();
+    }
+
+    public int getGroupCount() {
+        return wd.findElements(By.name("selected[]")).size();
     }
 }
