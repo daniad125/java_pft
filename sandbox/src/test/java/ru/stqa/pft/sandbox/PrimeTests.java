@@ -31,4 +31,13 @@ public class PrimeTests {
     public void primeWhile1() {
         Assert.assertTrue(Primes.isPrimeWhile(Integer.MAX_VALUE));
     }
+    @Test (enabled = false)
+    public void isPrimeLong() {
+        long n = Integer.MAX_VALUE;
+        Assert.assertTrue(Primes.isPrime(n));
+    }
+    @Test
+    public void testFast() {
+        Assert.assertTrue(Primes.isPrimeFast(Integer.MAX_VALUE));
+    }
 }
