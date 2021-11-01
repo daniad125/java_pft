@@ -9,4 +9,12 @@ public class Primes {
         }
         return true;
     }
+
+    public static boolean isPrimeWhile(int n) {
+        int i=2;
+        while (n%i!=0 && i<n) {
+            i++;
+        }
+        return n==i;
+    }
 }
