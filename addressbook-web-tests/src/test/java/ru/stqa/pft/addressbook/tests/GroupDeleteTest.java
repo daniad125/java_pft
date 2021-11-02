@@ -23,7 +23,7 @@ public class GroupDeleteTest extends TestBase {
         Assert.assertEquals(before.size(),after.size()+1);
 
         before.remove(before.size()-1);
-            Assert.assertEquals(before,after);
+        Assert.assertEquals(before,after);
 
     }
 
