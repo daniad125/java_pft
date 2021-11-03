@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ContactModificationTest extends TestBase{
-    @Test
+    @Test (enabled = false)
     public void testContactModification() {
         if(!app.getContactHelper().isThereAContact()){
             app.getContactHelper().createContact(new ContactData("Sergey", "Vertibutylkin", "Super House", "ul Dlinnaya, 8, 235", "995996", "vertiseychac@yandex.ru","test1"));
@@ -27,7 +27,7 @@ public class ContactModificationTest extends TestBase{
         before.sort(byId);
         after.sort(byId);
         Assert.assertEquals(before,after);
-        app.getNavigationHelper().gotoHomePage();
+        app.goTo().gotoHomePage();
 
     }
 }
