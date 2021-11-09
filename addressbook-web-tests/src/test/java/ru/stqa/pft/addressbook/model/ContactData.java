@@ -7,46 +7,9 @@ public class ContactData {
         return id;
     }
 
-    public void setId(int id) {
+    public ContactData withId(int id) {
         this.id = id;
-    }
-
-    private int id;
-    private final String name;
-    private final String lastname;
-    private final String company;
-    private final String address;
-    private final String homephone;
-    private final String email;
-    private String group;
-
-    public ContactData(String name, String lastname, String company, String address, String homephone, String email, String group) {
-        this.id = Integer.MAX_VALUE;
-        this.name = name;
-        this.lastname = lastname;
-        this.company = company;
-        this.address = address;
-        this.homephone = homephone;
-        this.email = email;
-        this.group = group;
-    }
-    public ContactData(int id,String name, String lastname, String company, String address, String homephone, String email, String group) {
-        this.id = id;
-        this.name = name;
-        this.lastname = lastname;
-        this.company = company;
-        this.address = address;
-        this.homephone = homephone;
-        this.email = email;
-        this.group = group;
-    }
-
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
-                '}';
+        return this;
     }
 
     @Override
@@ -54,12 +17,81 @@ public class ContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
-        return Objects.equals(name, that.name) && Objects.equals(lastname, that.lastname);
+        return id == that.id && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, lastname);
+        return Objects.hash(id, name);
+    }
+
+    public ContactData withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public ContactData withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData withCompany(String company) {
+        this.company = company;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public ContactData withHomephone(String homephone) {
+        this.homephone = homephone;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+    public ContactData withMobilephone(String mobilephone) {
+        this.mobilephone=mobilephone;
+        return this;
+    }
+    public ContactData withWorkphone(String workphone) {
+        this.workphone = workphone;
+        return this;
+    }
+    public ContactData withAllphones(String allphones) {
+        this.allphones=allphones;
+        return this;
+    }
+    private int id = Integer.MAX_VALUE;
+    private String name;
+    private String lastname;
+    private String company;
+    private String address;
+    private String homephone;
+    private String mobilephone;
+    private String email;
+    private String group;
+    private String workphone;
+    private String allphones;
+
+
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
     }
 
     public String getName() {
@@ -89,4 +121,16 @@ public class ContactData {
     public String getGroup() {
         return group;
     }
+
+    public String getMobilephone() {
+        return mobilephone;
+    }
+    public String getWorkphone() {
+        return workphone;
+    }
+    public String getAllphones() {
+        return allphones;
+    }
+
+
 }
