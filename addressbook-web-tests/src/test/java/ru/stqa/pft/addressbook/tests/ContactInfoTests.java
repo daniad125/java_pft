@@ -1,7 +1,5 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -12,7 +10,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactPhoneTests extends TestBase{
+public class ContactInfoTests extends TestBase{
     private ContactData contact;
     private ContactData contactInfoFromEditForm;
     @BeforeMethod
@@ -28,7 +26,7 @@ public class ContactPhoneTests extends TestBase{
      }
 
     private String mergePhones(ContactData contact) {
-        return Arrays.asList(contact.getHomephone(),contact.getMobilephone(),contact.getWorkphone()).stream().filter((s) -> !s.equals("")).map(ContactPhoneTests::cleaned).collect(Collectors.joining("\n"));
+        return Arrays.asList(contact.getHomephone(),contact.getMobilephone(),contact.getWorkphone()).stream().filter((s) -> !s.equals("")).map(ContactInfoTests::cleaned).collect(Collectors.joining("\n"));
     }
 
     public static String cleaned(String phone){
