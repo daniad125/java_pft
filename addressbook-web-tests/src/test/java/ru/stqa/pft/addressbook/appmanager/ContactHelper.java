@@ -140,8 +140,9 @@ public class ContactHelper extends HelperBase{
         String email=wd.findElement(By.name("email")).getAttribute("value");
         String email2=wd.findElement(By.name("email2")).getAttribute("value");
         String email3=wd.findElement(By.name("email3")).getAttribute("value");
+        String address=wd.findElement(By.name("address")).getText();
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withName(firstname).withLastname(lastname)
-                .withHomephone(home).withMobilephone(mobile).withWorkphone(work).withEmail(email).withEmail2(email2).withEmail3(email3);
+                .withHomephone(home).withMobilephone(mobile).withWorkphone(work).withEmail(email).withEmail2(email2).withEmail3(email3).withAddress(address);
     }
 }
