@@ -32,13 +32,16 @@ public class ContactInfoTests extends TestBase{
     public static String cleaned(String phone){
         return phone.replaceAll("\\s","").replaceAll("[-()]","");
     }
+    public static String emailcleaned(String email){
+        return email.replaceAll("\\s","");
+    }
     @Test (enabled = true)
     public void testContactEmail() {
-        assertThat(contact.getAllemails(),equalTo(mergeEmails(contactInfoFromEditForm)));
+        assertThat(contact.getAllemails().replaceAll(" ",""),equalTo(mergeEmails(contactInfoFromEditForm)));
 
     }
     private String mergeEmails(ContactData contact){
-        return Arrays.asList(contact.getEmail(),contact.getEmail2(),contact.getEmail3()).stream().filter((s) -> !s.equals("")).collect(Collectors.joining("\n"));
+        return Arrays.asList(contact.getEmail(),contact.getEmail2(),contact.getEmail3()).stream().filter((s) -> !s.equals("")).map(ContactInfoTests::emailcleaned).collect(Collectors.joining("\n"));
     }
 
     @Test

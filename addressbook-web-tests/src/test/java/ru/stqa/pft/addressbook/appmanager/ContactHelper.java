@@ -8,9 +8,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ContactHelper extends HelperBase{
 
@@ -60,7 +58,9 @@ public class ContactHelper extends HelperBase{
     public void initContactModificationById(int id) {
         click(By.cssSelector("a[href='edit.php?id="+id+"']"));
     }
-
+    public void viewContactInfoById(int id) {
+        click(By.cssSelector("a[href='view.php?id="+id+"']"));
+    }
     public void submitContactModification() {
         click(By.name("update"));
     }
@@ -144,5 +144,36 @@ public class ContactHelper extends HelperBase{
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withName(firstname).withLastname(lastname)
                 .withHomephone(home).withMobilephone(mobile).withWorkphone(work).withEmail(email).withEmail2(email2).withEmail3(email3).withAddress(address);
+    }
+
+    public ContactData infoView(ContactData contact) {
+        viewContactInfoById(contact.getId());
+        String homephone="";
+        String mobilephone="";
+        String workphone="";
+        String fullname = wd.findElement(By.id("content")).findElement(By.tagName("b")).getText();
+        String name = fullname.substring(0,fullname.indexOf(" "));
+        String lastname=fullname.substring(fullname.indexOf(" ")+1);
+        String allinfo = wd.findElement(By.id("content")).getText();
+        String address=allinfo.substring(allinfo.indexOf("\n")+1,allinfo.indexOf("\n\n"));
+        if (allinfo.contains("\n\nH:")) {
+            homephone = allinfo.substring(allinfo.indexOf("\n\nH:") + 5, allinfo.indexOf("\n", allinfo.indexOf("\n\nH:") + 2));
+        }
+        if (allinfo.contains("\nW:")) {
+            workphone=allinfo.substring(allinfo.indexOf("\nW:")+4,allinfo.indexOf("\n",allinfo.indexOf("\nW:")+2));
+        }
+        if (allinfo.contains("\nM:")) {
+            mobilephone=allinfo.substring(allinfo.indexOf("\nM:")+4,allinfo.indexOf("\n",allinfo.indexOf("\nM:")+2));
+        }
+        List<WebElement> allemailslist = wd.findElements(By.cssSelector("a[href^='mailto'"));
+        String allemails="";
+        for (WebElement email:allemailslist) {
+            allemails+=email.getText();
+        }
+//        allemails=allemails.substring(0,allemails.lastIndexOf("\n"));
+
+        return new ContactData().withId(contact.getId())
+                .withName(name).withLastname(lastname).withAddress(address)
+                .withHomephone(homephone).withMobilephone(mobilephone).withWorkphone(workphone).withAllemails(allemails);
     }
 }
