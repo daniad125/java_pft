@@ -23,7 +23,7 @@ public class ContactVIewTest extends TestBase{
         contact = app.contact().all().iterator().next();
         contactInfoFromEditForm=app.contact().infoFromEditForm(contact);
     }
-    @Test (enabled = true)
+    @Test (enabled = false)
     public void getViewInfo() {
         ContactData viewInfo=app.contact().infoView(contact);
         assertThat(contactInfoFromEditForm.getName(), equalTo(viewInfo.getName()));
