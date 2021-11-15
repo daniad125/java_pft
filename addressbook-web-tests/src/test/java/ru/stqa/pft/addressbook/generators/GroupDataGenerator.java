@@ -25,6 +25,7 @@ public class GroupDataGenerator {
     @Parameter(names = "-d",description = "Data format")
     public String format;
     public static void main(String[] args) throws IOException {
+        System.out.println(new File(".").getAbsolutePath());
         GroupDataGenerator generator = new GroupDataGenerator();
         JCommander jCommander = new JCommander(generator);
         try {

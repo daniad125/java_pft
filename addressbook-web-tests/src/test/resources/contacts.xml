@@ -1,0 +1,66 @@
+<list>
+  <contact>
+    <name>New person 0</name>
+    <lastname>lastname 0</lastname>
+    <address>Ul Novaya 0</address>
+    <homephone>2224520</homephone>
+    <email>person0@gmail.com</email>
+    <group>generator1</group>
+  </contact>
+  <contact>
+    <name>New person 1</name>
+    <lastname>lastname 1</lastname>
+    <address>Ul Novaya 1</address>
+    <homephone>2224521</homephone>
+    <email>person1@gmail.com</email>
+    <group>generator1</group>
+  </contact>
+  <contact>
+    <name>New person 2</name>
+    <lastname>lastname 2</lastname>
+    <address>Ul Novaya 2</address>
+    <homephone>2224522</homephone>
+    <email>person2@gmail.com</email>
+    <group>generator1</group>
+  </contact>
+  <contact>
+    <name>New person 3</name>
+    <lastname>lastname 3</lastname>
+    <address>Ul Novaya 3</address>
+    <homephone>2224523</homephone>
+    <email>person3@gmail.com</email>
+    <group>generator1</group>
+  </contact>
+  <contact>
+    <name>New person 4</name>
+    <lastname>lastname 4</lastname>
+    <address>Ul Novaya 4</address>
+    <homephone>2224524</homephone>
+    <email>person4@gmail.com</email>
+    <group>generator1</group>
+  </contact>
+  <contact>
+    <name>New person 5</name>
+    <lastname>lastname 5</lastname>
+    <address>Ul Novaya 5</address>
+    <homephone>2224525</homephone>
+    <email>person5@gmail.com</email>
+    <group>generator1</group>
+  </contact>
+  <contact>
+    <name>New person 6</name>
+    <lastname>lastname 6</lastname>
+    <address>Ul Novaya 6</address>
+    <homephone>2224526</homephone>
+    <email>person6@gmail.com</email>
+    <group>generator1</group>
+  </contact>
+  <contact>
+    <name>New person 7</name>
+    <lastname>lastname 7</lastname>
+    <address>Ul Novaya 7</address>
+    <homephone>2224527</homephone>
+    <email>person7@gmail.com</email>
+    <group>generator1</group>
+  </contact>
+</list>

@@ -56,7 +56,7 @@ public class GroupCreationTest extends TestBase{
         }
     }
 
-    @Test(dataProvider = "validGroupsFromJson")
+    @Test(dataProvider = "validGroupsFromXml")
     public void testGroupCreation(GroupData group) throws Exception {
         app.goTo().groupPage();
         Groups before = app.group().all();
