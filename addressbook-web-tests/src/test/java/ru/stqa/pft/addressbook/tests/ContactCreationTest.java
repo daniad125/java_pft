@@ -56,24 +56,24 @@ public class ContactCreationTest extends TestBase{
   @Test (enabled = true,dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) throws Exception {
     Groups groups = app.db().groups();
+    Contacts before = app.db().contacts();
     app.goTo().homePage();
-    Contacts before = app.contact().all();
     app.contact().create(contact);
     assertEquals(before.size(),app.contact().count()-1);
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
     app.goTo().homePage();
   }
   @Test (enabled = true)
   public void testBadContactCreation() throws Exception {
+    Contacts before = app.db().contacts();
     app.goTo().homePage();
-    Contacts before = app.contact().all();
     ContactData contact = new ContactData().withName("HaHa'");
 //            .withGroup("test1");
     app.contact().create(contact);
     assertEquals(before.size(),app.contact().count());
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
 
     assertThat(after, equalTo(before));
     app.goTo().homePage();

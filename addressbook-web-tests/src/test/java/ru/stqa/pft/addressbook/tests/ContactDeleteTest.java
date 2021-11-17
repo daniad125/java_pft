@@ -18,19 +18,19 @@ import static org.testng.Assert.assertEquals;
 public class ContactDeleteTest extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
-        app.goTo().homePage();
-        if(app.contact().all().size()==0){
+        if(app.db().contacts().size()==0){
+            app.goTo().homePage();
             app.contact().create(new ContactData().withName("Sergey").withLastname("Vertibutylkin").withCompany("Super House").withAddress("ul Dlinnaya, 8, 235").withHomephone("995996").withEmail("vertiseychac@yandex.ru"));
 //                    .withGroup("test1"));
         }
     }
     @Test (enabled = true)
     public void testDeleteContact() throws Exception{
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         ContactData deletedContact = before.iterator().next();
         app.contact().delete(deletedContact);
         assertEquals(before.size(), app.contact().count()+1);
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertThat(after,equalTo(before.without(deletedContact)));
     }
 
