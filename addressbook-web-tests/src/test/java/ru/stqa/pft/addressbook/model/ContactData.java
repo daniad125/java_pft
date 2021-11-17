@@ -3,11 +3,17 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
     public int getId() {
         return id;
@@ -61,12 +67,6 @@ public class ContactData {
         return this;
     }
 
-
-
-    public ContactData withGroup(String group) {
-        this.group = group;
-        return this;
-    }
     public ContactData withEmail2(String email) {
         this.email2=email;
         return this;
@@ -92,36 +92,71 @@ public class ContactData {
         return this;
     }
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
+        return this;
+    }
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
         return this;
     }
     @XStreamOmitField
+
+    @Id
     private int id = Integer.MAX_VALUE;
     @Expose
+    @Column(name = "firstname")
     private String name;
     @Expose
+    @Column
     private String lastname;
     @Expose
+    @Column
     private String company;
     @Expose
+    @Column
+    @Type(type = "text")
     private String address;
     @Expose
+    @Column(name="home")
+    @Type(type = "text")
     private String homephone;
     @Expose
+    @Column(name="mobile")
+    @Type(type = "text")
     private String mobilephone;
     @Expose
+    @Column
+    @Type(type = "text")
     private String email;
     @Expose
+    @Column
+    @Type(type = "text")
     private String email2;
     @Expose
+    @Column
+    @Type(type = "text")
     private String email3;
     @Expose
-    private String group;
+
+    @Column(name="work")
+    @Type(type = "text")
     private String workphone;
+    @Transient
     private String allphones;
+    @Transient
     private String allemails;
     @Expose
-    private File photo;
+    @Column(name="photo")
+    @Type(type = "text")
+    private String photo;
+
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="address_in_groups", joinColumns = @JoinColumn(name = "id"),inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
 
 
 
@@ -167,9 +202,6 @@ public class ContactData {
         return email3;
     }
 
-    public String getGroup() {
-        return group;
-    }
 
     public String getMobilephone() {
         return mobilephone;
@@ -184,7 +216,7 @@ public class ContactData {
         return allemails;
     }
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
 

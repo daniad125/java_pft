@@ -27,6 +27,7 @@ public class GroupCreationTest extends TestBase{
 
     @DataProvider
     public Iterator<Object[]> validGroupsFromXml() throws IOException {
+        System.out.println(new File(".").getAbsolutePath());
         try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")))){
             String xml = "";
             String line = reader.readLine();
@@ -59,25 +60,28 @@ public class GroupCreationTest extends TestBase{
     @Test(dataProvider = "validGroupsFromXml")
     public void testGroupCreation(GroupData group) throws Exception {
         app.goTo().groupPage();
-        Groups before = app.group().all();
+        System.out.println(new File(".").getAbsolutePath());
+        Groups before = app.db().groups();
         app.group().create(group);
         assertThat(before.size(),equalTo(app.group().count()-1));
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
         assertThat(after, equalTo(
                 before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+        verifyGroupListInUi();
 
     }
     @Test
     public void testBadGroupCreation() throws Exception {
 
         app.goTo().groupPage();
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         GroupData group = new GroupData().withName("test'");
         app.group().create(group);
         assertThat(before.size(),equalTo(app.group().count()));
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
 
         assertThat(after, equalTo(before));
+        verifyGroupListInUi();
     }
 
 }

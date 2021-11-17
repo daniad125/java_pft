@@ -20,7 +20,8 @@ public class ContactDeleteTest extends TestBase {
     public void ensurePreconditions() {
         app.goTo().homePage();
         if(app.contact().all().size()==0){
-            app.contact().create(new ContactData().withName("Sergey").withLastname("Vertibutylkin").withCompany("Super House").withAddress("ul Dlinnaya, 8, 235").withHomephone("995996").withEmail("vertiseychac@yandex.ru").withGroup("test1"));
+            app.contact().create(new ContactData().withName("Sergey").withLastname("Vertibutylkin").withCompany("Super House").withAddress("ul Dlinnaya, 8, 235").withHomephone("995996").withEmail("vertiseychac@yandex.ru"));
+//                    .withGroup("test1"));
         }
     }
     @Test (enabled = true)

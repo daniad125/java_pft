@@ -18,12 +18,14 @@ public class ApplicationManager {
     private GroupHelper groupHelper;
     private ContactHelper contactHelper;
     private String browser;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
     }
 
     public void init() {
+        dbHelper = new DbHelper();
         if (browser.equals(BrowserType.CHROME)) {
             System.setProperty("webdriver.chrome.driver", "/Windows/System32/chromedriver.exe");
             wd = new ChromeDriver();
@@ -42,6 +44,7 @@ public class ApplicationManager {
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login("admin", "secret");
+
     }
 
 
@@ -74,4 +77,8 @@ public class ApplicationManager {
     }
 
     public ContactHelper contact() {return contactHelper;}
+
+    public DbHelper db() {
+        return dbHelper;
+    }
 }

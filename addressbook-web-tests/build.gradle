@@ -10,15 +10,20 @@ task testGroups(type: Test) {
     if (project.hasProperty('browser')) {
         systemProperty 'browser',"${browser}"
     }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'veryfyUI', "${verifyUI}"
+    }
 }
 task testContacts(type: Test) {
     useTestNG() {
         suites 'src/test/resources/testng-contacts.xml'
     }
     if (project.hasProperty('browser')) {
-        systemProperty 'browser',"${browser}"
+        systemProperty 'browser', "${browser}"
     }
-
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'veryfyUI', "${verifyUI}"
+    }
 }
 repositories {
     mavenCentral()
