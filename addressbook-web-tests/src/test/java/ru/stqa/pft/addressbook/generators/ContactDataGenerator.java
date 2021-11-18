@@ -76,7 +76,7 @@ public class ContactDataGenerator {
             contacts.add(new ContactData()
                     .withName(String.format("New person %s",i)).withLastname(String.format("lastname %s",i))
                     .withAddress(String.format("Ul Novaya %s",i)).withHomephone(String.format("222452%s",i)).withEmail(String.format("person%s@gmail.com",i)));
-//                    .inGroup("generator1"));
+ //                   .inGroup("generator1"));
         }
         return contacts;
     }

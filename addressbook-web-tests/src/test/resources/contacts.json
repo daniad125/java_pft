@@ -4,39 +4,34 @@
     "lastname": "lastname 0",
     "address": "Ul Novaya 0",
     "homephone": "2224520",
-    "email": "person0@gmail.com",
-    "group": "generator1"
+    "email": "person0@gmail.com"
   },
   {
     "name": "New person 1",
     "lastname": "lastname 1",
     "address": "Ul Novaya 1",
     "homephone": "2224521",
-    "email": "person1@gmail.com",
-    "group": "generator1"
+    "email": "person1@gmail.com"
   },
   {
     "name": "New person 2",
     "lastname": "lastname 2",
     "address": "Ul Novaya 2",
     "homephone": "2224522",
-    "email": "person2@gmail.com",
-    "group": "generator1"
+    "email": "person2@gmail.com"
   },
   {
     "name": "New person 3",
     "lastname": "lastname 3",
     "address": "Ul Novaya 3",
     "homephone": "2224523",
-    "email": "person3@gmail.com",
-    "group": "generator1"
+    "email": "person3@gmail.com"
   },
   {
     "name": "New person 4",
     "lastname": "lastname 4",
     "address": "Ul Novaya 4",
     "homephone": "2224524",
-    "email": "person4@gmail.com",
-    "group": "generator1"
+    "email": "person4@gmail.com"
   }
 ]

@@ -53,11 +53,15 @@ public class ContactCreationTest extends TestBase{
   }
 
 
-  @Test (enabled = true,dataProvider = "validContactsFromJson")
+  @Test (enabled = true,dataProvider = "validContactsFromXml")
   public void testContactCreation(ContactData contact) throws Exception {
     Groups groups = app.db().groups();
+    GroupData group;
     Contacts before = app.db().contacts();
     app.goTo().homePage();
+    Groups allGroups=app.db().selectGroupsByName("generator1");
+    group=allGroups.iterator().next();
+    contact=contact.inGroup(group);
     app.contact().create(contact);
     assertEquals(before.size(),app.contact().count()-1);
     Contacts after = app.db().contacts();
@@ -68,9 +72,16 @@ public class ContactCreationTest extends TestBase{
   @Test (enabled = true)
   public void testBadContactCreation() throws Exception {
     Contacts before = app.db().contacts();
+    GroupData group;
     app.goTo().homePage();
-    ContactData contact = new ContactData().withName("HaHa'");
-//            .withGroup("test1");
+    Groups allGroups=app.db().selectGroupsByName("test1");
+//    if (allGroups.size()==1) {
+      group = allGroups.iterator().next();
+//    }
+//    else {
+      System.out.println(allGroups);
+//    }
+    ContactData contact = new ContactData().withName("HaHa'").inGroup(group);
     app.contact().create(contact);
     assertEquals(before.size(),app.contact().count());
     Contacts after = app.db().contacts();

@@ -39,4 +39,20 @@ public class DbHelper {
         session.close();
         return new Contacts(result);
     }
+
+    public Groups selectGroupsByName(String name) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<GroupData> result =session.createQuery("from GroupData where group_name='"+name+"'").list();
+        session.getTransaction().commit();
+        session.close();
+        return new Groups(result);
+    }
+    public void addContactToGroup(ContactData contact, GroupData group) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.createQuery("from GroupData where group_name='"+group.getName());
+    }
+
+
 }

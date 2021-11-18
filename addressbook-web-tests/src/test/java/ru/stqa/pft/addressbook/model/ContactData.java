@@ -15,6 +15,8 @@ import java.util.Set;
 @Entity
 @Table(name = "addressbook")
 public class ContactData {
+
+
     public int getId() {
         return id;
     }
@@ -95,8 +97,10 @@ public class ContactData {
         this.photo = photo.getPath();
         return this;
     }
+
     public ContactData inGroup(GroupData group) {
         groups.add(group);
+//        this.groupName=group.getName();
         return this;
     }
     @XStreamOmitField
@@ -149,6 +153,8 @@ public class ContactData {
     @Column(name="photo")
     @Type(type = "text")
     private String photo;
+
+//    private String groupName;
 
     public Groups getGroups() {
         return new Groups(groups);
