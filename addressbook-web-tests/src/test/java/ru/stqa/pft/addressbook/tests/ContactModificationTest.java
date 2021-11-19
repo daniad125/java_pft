@@ -11,6 +11,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -18,10 +19,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 
 public class ContactModificationTest extends TestBase{
+    GroupData group;
     @BeforeMethod
     public void ensurePreconditions() {
         if(app.db().contacts().size()==0){
-            GroupData group;
             app.goTo().homePage();
             Groups allGroups=app.db().selectGroupsByName("test1");
             group = allGroups.iterator().next();
@@ -33,8 +34,15 @@ public class ContactModificationTest extends TestBase{
 
         Contacts before = app.db().contacts();
         ContactData contactToModify = before.iterator().next();
+        System.out.println(contactToModify.getGroups());
+        System.out.println("HAHA");
+
         ContactData contact = new ContactData()
                 .withId(contactToModify.getId()).withName("Karaul").withLastname("Karaulkin").withCompany("5 otd").withAddress("Vertlivaya 24").withHomephone("232453").withEmail("karaul12345@gmail.com");
+        Iterator<GroupData> groups=contactToModify.getGroups().iterator();
+        while (groups.hasNext()) {
+            contact=contact.inGroup(groups.next());
+        }
         app.goTo().homePage();
         app.contact().modify(contact);
         assertEquals(before.size(), app.contact().count());

@@ -29,6 +29,7 @@ public class ContactHelper extends HelperBase{
         type(By.name("address"),contactData.getAddress());
         type(By.name("home"),contactData.getHomephone());
         type(By.name("email"),contactData.getEmail());
+        type(By.name("email2"),contactData.getEmail2());
 //        attach(By.name("photo"),contactData.getPhoto());
         if (creation) {
             Assert.assertTrue(contactData.getGroups().size()==1);

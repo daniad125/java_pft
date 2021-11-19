@@ -26,19 +26,6 @@ public class ContactData {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return id == that.id && Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
-
     public ContactData withName(String name) {
         this.name = name;
         return this;
@@ -109,42 +96,42 @@ public class ContactData {
     private int id = Integer.MAX_VALUE;
     @Expose
     @Column(name = "firstname")
-    private String name;
+    private String name=null;
     @Expose
     @Column
     private String lastname;
     @Expose
     @Column
-    private String company;
+    private String company=null;
     @Expose
     @Column
     @Type(type = "text")
-    private String address;
+    private String address=null;
     @Expose
     @Column(name="home")
     @Type(type = "text")
-    private String homephone;
+    private String homephone=null;
     @Expose
     @Column(name="mobile")
     @Type(type = "text")
-    private String mobilephone;
+    private String mobilephone=null;
     @Expose
     @Column
     @Type(type = "text")
-    private String email;
+    private String email=null;
     @Expose
     @Column
     @Type(type = "text")
-    private String email2;
+    private String email2=null;
     @Expose
     @Column
     @Type(type = "text")
-    private String email3;
+    private String email3=null;
     @Expose
 
     @Column(name="work")
     @Type(type = "text")
-    private String workphone;
+    private String workphone=null;
     @Transient
     private String allphones;
     @Transient
@@ -152,7 +139,7 @@ public class ContactData {
     @Expose
     @Column(name="photo")
     @Type(type = "text")
-    private String photo;
+    private String photo=null;
 
 //    private String groupName;
 
@@ -164,9 +151,37 @@ public class ContactData {
     @JoinTable(name="address_in_groups", joinColumns = @JoinColumn(name = "id"),inverseJoinColumns = @JoinColumn(name = "group_id"))
     private Set<GroupData> groups = new HashSet<GroupData>();
 
+    public boolean equalnullstrings(String a,String b) {
+        if (a==null) {
+            if (b==null || b=="") {
+                return true;
+            }
+        }
+        if (b==null)  {
+            if (a==null || a=="") {
+                return true;
+            }
+        }
+        if (a=="") {
+            if (b=="") {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return id == that.id && (Objects.equals(name, that.name)||equalnullstrings(name,that.name)) && ((Objects.equals(lastname, that.lastname)||equalnullstrings(lastname,that.lastname)) && Objects.equals(company, that.company)||equalnullstrings(company,that.company)) && (Objects.equals(address, that.address)||equalnullstrings(address,that.address)) && (Objects.equals(homephone, that.homephone)||equalnullstrings(homephone,that.homephone)) && (Objects.equals(mobilephone, that.mobilephone)||equalnullstrings(mobilephone,that.mobilephone)) && (Objects.equals(email, that.email)||equalnullstrings(email,that.email)) && (Objects.equals(email2, that.email2)||equalnullstrings(email2,that.email2)) && (Objects.equals(email3, that.email3)||equalnullstrings(email3,that.email3)) && (Objects.equals(workphone, that.workphone)||equalnullstrings(workphone,that.workphone)) && (Objects.equals(photo, that.photo)||equalnullstrings(photo,that.photo))&& Objects.equals(groups, that.groups);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, lastname, company, address, homephone, mobilephone, email, email2, email3, workphone, photo, groups);
+    }
 
     @Override
     public String toString() {
