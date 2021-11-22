@@ -21,6 +21,10 @@ public class AddContactToGroupTest extends TestBase{
             app.goTo().groupPage();
             app.group().create(new GroupData().withName("test99"));
         }
+        if(app.db().selectGroupsByName("test99").size()==0){
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("test99"));
+        }
         if(app.db().contacts().size()==0) {
             app.goTo().homePage();
             Groups allGroups=app.db().selectGroupsByName("test99");
@@ -37,12 +41,10 @@ public class AddContactToGroupTest extends TestBase{
         GroupData group = app.db().selectGroupsByName("test99").iterator().next();
         app.goTo().homePage();
         app.contact().addContactToGroup(contact,group);
-        Groups after=contact.getGroups();
-        assertThat(after, equalTo(before.withAdded(group)));
         Contacts contacts_after=app.db().contacts();
         assertEquals(contacts_before.size(),contacts_after.size());
         contact=app.db().selectContactById(id);
-        after=contact.getGroups();
+        Groups after=contact.getGroups();
         assertThat(after, equalTo(before.withAdded(group)));
     }
 }

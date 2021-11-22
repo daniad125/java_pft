@@ -11,6 +11,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -64,7 +65,20 @@ public class DbHelper {
         session.beginTransaction();
         List<GroupData> groups =session.createQuery("from GroupData where deprecated is null and group_name='"+name+"'").list();
         GroupData group = groups.get(0);
-        List<ContactData> contacts = session.createQuery("from ContactData").list();
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        Contacts copy = group.getContacts();
+        Iterator<ContactData> iter=copy.iterator();
+        while (iter.hasNext()) {
+            int id=iter.next().getId();
+            List<ContactData> contacts1=session.createQuery("from ContactData where deprecated is null and id="+id).list();
+            if (contacts1.size()>0){
+                ContactData contact1 = contacts1.get(0);
+                contacts.add(contact1);
+            }
+
+
+        }
+
 
         session.getTransaction().commit();
         session.close();

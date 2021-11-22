@@ -28,6 +28,7 @@ public class RemoveContactFromGroup extends TestBase{
         }
         else {
             GroupData group = app.db().selectGroupsByName("test99").iterator().next();
+            int id = group.getId();
             Contacts contacts = app.db().selectContactsByGroupName("test99");
             if(contacts.size()==0){
                 app.goTo().homePage();
@@ -39,18 +40,16 @@ public class RemoveContactFromGroup extends TestBase{
     @Test
     public void ContactRemovingTest() {
         Contacts contacts_before = app.db().contacts();
-        ContactData contact=contacts_before.iterator().next();
+        GroupData group= app.db().selectGroupsByName("test99").iterator().next();
+        ContactData contact=app.db().selectContactsByGroupName("test99").iterator().next();
         int id=contact.getId();
         Groups before=contact.getGroups();
-        GroupData group= app.db().selectGroupsByName("test99").iterator().next();
         app.goTo().homePage();
         app.contact().removeContactFromGroup(contact,group);
-        Groups after=contact.getGroups();
-        assertThat(after, equalTo(before.without(group)));
         Contacts contacts_after=app.db().contacts();
         assertEquals(contacts_before.size(),contacts_after.size());
         contact=app.db().selectContactById(id);
-        after=contact.getGroups();
+        Groups after=contact.getGroups();
         assertThat(after, equalTo(before.without(group)));
     }
 }
