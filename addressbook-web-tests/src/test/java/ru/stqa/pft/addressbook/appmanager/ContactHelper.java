@@ -21,7 +21,12 @@ public class ContactHelper extends HelperBase{
     public void submitContactCreation() {
         click(By.xpath("//input[21]"));
     }
-
+    public void submitContactToGroupAdding() {
+        click(By.name("add"));
+    }
+    public void submitContactFromGroupRemoving() {
+        click(By.name("remove"));
+    }
     public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"),contactData.getName());
         type(By.name("lastname"),contactData.getLastname());
@@ -42,9 +47,21 @@ public class ContactHelper extends HelperBase{
     }
 
     public void addContactToGroup(ContactData contact, GroupData group) {
-        if(isElementPresent(By.name("new_group"))) {
+        selectContactsById(contact.getId());
+        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
+        submitContactToGroupAdding();
+    }
 
-        }
+    public void removeContactFromGroup(ContactData contact, GroupData group) {
+        initRemovingContactFromGroup(group);
+        selectContactsById(contact.getId());
+        submitContactFromGroupRemoving();
+    }
+
+
+
+    public void initRemovingContactFromGroup(GroupData group) {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getName());
     }
 
     public boolean isThereAContact() {

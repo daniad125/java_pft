@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.File;
@@ -14,6 +15,7 @@ import java.util.Set;
 @XStreamAlias("contact")
 @Entity
 @Table(name = "addressbook")
+//@Where( clause = "deprecated is null" )
 public class ContactData {
 
 

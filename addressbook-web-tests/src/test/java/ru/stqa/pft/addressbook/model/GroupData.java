@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import java.util.Set;
 @XStreamAlias("group")
 @Entity
 @Table(name = "group_list")
+//@Where( clause = "deprecated is null" )
 public class GroupData {
     @XStreamOmitField
     @Id

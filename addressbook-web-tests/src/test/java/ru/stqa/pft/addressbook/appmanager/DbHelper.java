@@ -10,6 +10,8 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import java.lang.reflect.Array;
+import java.util.Iterator;
 import java.util.List;
 
 public class DbHelper {
@@ -25,7 +27,7 @@ public class DbHelper {
     public Groups groups() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<GroupData> result = session.createQuery( "from GroupData" ).list();
+        List<GroupData> result = session.createQuery( "from GroupData where deprecated is null" ).list();
         session.getTransaction().commit();
         session.close();
         return new Groups(result);
@@ -43,15 +45,30 @@ public class DbHelper {
     public Groups selectGroupsByName(String name) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<GroupData> result =session.createQuery("from GroupData where group_name='"+name+"'").list();
+        List<GroupData> result =session.createQuery("from GroupData where deprecated is null and group_name='"+name+"'").list();
         session.getTransaction().commit();
         session.close();
         return new Groups(result);
     }
-    public void addContactToGroup(ContactData contact, GroupData group) {
+    public ContactData selectContactById(int id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.createQuery("from GroupData where group_name='"+group.getName());
+        List<ContactData> result=session.createQuery("from ContactData where deprecated is null and id="+id).list();
+        session.getTransaction().commit();
+        session.close();
+        ContactData contact = result.get(0);
+        return contact;
+    }
+    public Contacts selectContactsByGroupName(String name) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<GroupData> groups =session.createQuery("from GroupData where deprecated is null and group_name='"+name+"'").list();
+        GroupData group = groups.get(0);
+        List<ContactData> contacts = session.createQuery("from ContactData").list();
+
+        session.getTransaction().commit();
+        session.close();
+        return new Contacts(contacts);
     }
 
 

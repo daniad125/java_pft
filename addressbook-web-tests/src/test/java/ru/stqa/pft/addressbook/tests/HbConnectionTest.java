@@ -8,6 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
@@ -42,6 +43,17 @@ public class HbConnectionTest {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
+        List<GroupData> groups = session.createQuery("from ContactData join address_in_groups on ContactData.id=address_in_groups.id where group_id=168").list();
+        for (GroupData group:groups) {
+            System.out.println(group.getName());
+            Contacts allContacts = group.getContacts();
+            for (ContactData contact: allContacts) {
+                System.out.println(contact);
+            }
+
+        }
+
+        /*
         List<ContactData> contacts = session.createQuery("from ContactData where deprecated is null").list();
 
 
@@ -56,6 +68,8 @@ public class HbConnectionTest {
                 }
             }
         }
+
+        */
         session.getTransaction().commit();
         session.close();
     }
