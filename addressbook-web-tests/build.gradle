@@ -25,6 +25,12 @@ task testContacts(type: Test) {
         systemProperty 'veryfyUI', "${verifyUI}"
     }
 }
+task rf(type: JavaExec) {
+    main = 'org.robotframework.RobotFramework'
+    classpath = sourceSets.test.runtimeClasspath
+    args '--outputdir','build/rf-report'
+    args 'src/test/resources/rf'
+}
 repositories {
     mavenCentral()
 }
@@ -38,4 +44,5 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.1.5'
     implementation 'mysql:mysql-connector-java:5.1.38'
     implementation 'org.hibernate:hibernate-core:5.1.0.Final'
+    implementation 'org.robotframework:robotframework:3.0'
 }
