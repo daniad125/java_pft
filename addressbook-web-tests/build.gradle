@@ -45,4 +45,6 @@ dependencies {
     implementation 'mysql:mysql-connector-java:5.1.38'
     implementation 'org.hibernate:hibernate-core:5.1.0.Final'
     implementation 'org.robotframework:robotframework:3.0'
+    implementation 'info.cukes:cucumber-java:1.2.4'
+    implementation 'info.cukes:cucumber-testng:1.2.4'
 }
